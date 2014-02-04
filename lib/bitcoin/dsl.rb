@@ -169,6 +169,11 @@ module Bitcoin::DSL
   end
   
   # Returns Object that has account names as keys, account balances as values. 
+
+  def importaddress(address, label, rescan=true)
+    bitcoin.importaddress(address, label, rescan)
+  end
+
   def listaccounts(minconf = 1)
     bitcoin.listaccounts minconf
   end
@@ -195,6 +200,22 @@ module Bitcoin::DSL
     bitcoin.listreceivedbyaddress minconf, includeempty
   end
   
+  def listsinceblock(blockhash=nil, confirmations=nil)
+    bitcoin.listsinceblock(blockhash, confirmations)
+  end
+
+  def listunspent(minconf=1, maxconf, addresses)
+    bitcoin.listunspent(minconf, maxconf, addresses)
+  end
+
+  def getrawtranaction(tx, verbose=1)
+    bitcoin.getrawtransaction(tx, verbose)
+  end
+
+  def decoderawtransaction(hex)
+    bitcoin.decoderawtransaction(hex)
+  end
+
   # Returns up to +count+ most recent transactions for account +account+. 
   def listtransactions(account, count = 10)
     bitcoin.listtransactions account, count
