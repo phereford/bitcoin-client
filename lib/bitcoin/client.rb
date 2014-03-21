@@ -138,6 +138,10 @@ class Bitcoin::Client
     @api.request 'help', command
   end
 
+  def importaddress(address, label, rescan)
+    @api.request 'importaddress', address, label, rescan
+  end
+
   # Returns Object that has account names as keys, account balances as values.
   def listaccounts(minconf = 1)
     @api.request 'listaccounts', minconf
@@ -168,6 +172,22 @@ class Bitcoin::Client
   # Returns up to +count+ most recent transactions for account +account+.
   def listtransactions(account, count = 10)
     @api.request 'listtransactions', account, count
+  end
+
+  def listsinceblock(blockhash=nil, confirmations=nil)
+    @api.request 'listsinceblock', blockhash, confirmations
+  end
+
+  def listunspent(minconf, maxconf, addresses)
+    @api.request 'listunspent', minconf, maxconf, addresses
+  end
+
+  def getrawtransaction(txid, verbose=1)
+    @api.request 'getrawtransaction', txid, verbose
+  end
+
+  def decoderawtransaction(hex)
+    @api.request 'decoderawtransaction', hex
   end
 
   # Move from one account in your wallet to another.
